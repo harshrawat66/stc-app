@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 
-const Logins = mongoose.model('Logins', {
+const loginSchema = new mongoose.Schema({
     userName: {
         type: String,
         required: true,
@@ -17,7 +16,21 @@ const Logins = mongoose.model('Logins', {
                 throw new Error('Password must not conatin password')
             }
         }
+    },
+    role: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     }
+},{
+    timestamps: true
 });
+
+const Logins = mongoose.model('Logins', loginSchema);
 
 module.exports = Logins;

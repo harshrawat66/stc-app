@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const Reports = mongoose.model('Reports', {
+const reportsSchema = new mongoose.Schema({
     companyTitle: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        trim: true
+        ref: 'Companies'
     },
     costToCompany: {
         type: String,
@@ -25,7 +25,7 @@ const Reports = mongoose.model('Reports', {
         trim: true,
         validate(value){
             if(value < 0){
-                throw new Error('Candidates appeared must be greater than zero')
+                throw new Error('Number of candidates must be greater than zero')
             }
         }
     },
@@ -33,7 +33,12 @@ const Reports = mongoose.model('Reports', {
         type: Number,
         required:true,
         default: null,
-        required:true
+        required:true,
+        validate(value){
+            if(value < 0){
+                throw new Error('Number of candidates must be greater than zero')
+            }
+        }
     },
     jobEligibility:{
         type: String,
@@ -49,7 +54,20 @@ const Reports = mongoose.model('Reports', {
         type: String,
         required: true,
         trim: true
-    }
+    },
+    addedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref: 'User'
+    },
+    isProcessComplete: {
+        type: Boolean,
+        required: true
+    }  
+}, {
+    timestamps:true
 });
+
+const Reports = mongoose.model('Reports', reportsSchema);
 
 module.exports = Reports;
