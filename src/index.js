@@ -23,17 +23,10 @@ hbs.registerPartials(partialsPath);
 
 app.get('', (req, res) => {
    res.render('index', {
-       title: 'Weather App',
-       name: 'Harsh Rawat'
+       title: 'STC-APP',
+       name: 'STC-KIET'
    })
-})
-
-app.get('/home', (req, res) => {
-   res.render('reports', {
-       title: 'Weather App',
-       name: 'Harsh Rawat'
-   })
-})
+});
  
 app.listen(port, () => {
    console.log('server up on port ' + port);
