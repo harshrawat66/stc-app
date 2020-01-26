@@ -19,6 +19,7 @@ const companiesSchema = new mongoose.Schema({
     logoPath: {
         type: String,
         required:true,
+        unique: true,
         trim: true
     }
 },{

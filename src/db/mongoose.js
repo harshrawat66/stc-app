@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const dbPath = require('../configBreakout')
 
-mongoose.connect('mongodb://127.0.0.1:27017/stc-app-api', {
+mongoose.connect(dbPath.dbPath, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,

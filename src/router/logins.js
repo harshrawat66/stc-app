@@ -2,7 +2,7 @@ const express = require('express')
 const Users = require('../models/logins')
 const router = new express.Router()
 
-router.post('/logins', async (req, res) => {
+router.post('/login', async (req, res) => {
     const user = new Users(req.body)
     try{
         await user.save();
@@ -12,7 +12,7 @@ router.post('/logins', async (req, res) => {
     }
 });
 
-router.get('/logins', async (req, res)=> {
+router.get('/login', async (req, res)=> {
     try{
         const user = await Users.find({});
         res.send(user);
@@ -21,7 +21,7 @@ router.get('/logins', async (req, res)=> {
     }
 });
 
-router.get('/logins/:id', async (req, res)=> {
+router.get('/login/:id', async (req, res)=> {
     const _id =  req.params.id;
     try{
         const user = await Users.findById(_id) ;
@@ -34,7 +34,7 @@ router.get('/logins/:id', async (req, res)=> {
     }
 });
 
-router.patch('/logins/:id', async (req, res) => {
+router.patch('/login/:id', async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['userName', 'password'] ;
     const isValidOpertion = updates.every((update)=> {
@@ -57,7 +57,7 @@ router.patch('/logins/:id', async (req, res) => {
     }
 });
 
-router.delete('/logins/:id', async (req,res) =>{
+router.delete('/login/:id', async (req,res) =>{
     try{
         const user = await Users.findByIdAndDelete(req.params.id)
         if(!user){

@@ -2,7 +2,7 @@ const express = require('express')
 const Reports = require('../models/reports')
 const router = new express.Router()
 
-router.post('/reports', async (req, res) => {
+router.post('/report', async (req, res) => {
     const report = new Reports(req.body)
     try{
         await report.save();
@@ -12,7 +12,7 @@ router.post('/reports', async (req, res) => {
     }
 });
 
-router.get('/reports', async (req, res)=> {
+router.get('/report', async (req, res)=> {
     try{
         const report = await Reports.find({});
         res.send(report);
@@ -21,7 +21,7 @@ router.get('/reports', async (req, res)=> {
     }
 });
 
-router.get('/reports/:id', async (req, res)=> {
+router.get('/report/:id', async (req, res)=> {
     const _id =  req.params.id;
     try{
         const report = await Reports.findById(_id) ;
@@ -34,7 +34,7 @@ router.get('/reports/:id', async (req, res)=> {
     }
 });
 
-router.patch('/reports/:id', async (req, res) => {
+router.patch('/report/:id', async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['companyTitle', 'costToCompany', 'candidatesAppeared', 'candidatesSelected','report','jobEligibility','jobProfile'] ;
     const isValidOpertion = updates.every((update)=> {
@@ -57,7 +57,7 @@ router.patch('/reports/:id', async (req, res) => {
     }
 });
 
-router.delete('/reports/:id', async (req,res) =>{
+router.delete('/report/:id', async (req,res) =>{
     try{
         const report = await Reports.findByIdAndDelete(req.params.id)
         if(!report){
