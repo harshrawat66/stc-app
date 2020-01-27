@@ -1,4 +1,3 @@
-const request = require('request') ;
 const jwt = require('jsonwebtoken') ;
 const User = require('../models/studentLogins');
 const {jwtSigningKey} = require('../configBreakout')

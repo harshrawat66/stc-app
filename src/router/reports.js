@@ -1,8 +1,9 @@
 const express = require('express')
 const Reports = require('../models/reports')
+const Company = require('../models/companies')
 const router = new express.Router()
 
-// router.post('/report', async (req, res) => {
+// router.post('/report/add', async (req, res) => {
 //     const report = new Reports(req.body)
 //     try{
 //         await report.save();
@@ -11,6 +12,16 @@ const router = new express.Router()
 //         res.status(400).send(e);
 //     }
 // });
+
+// router.post('/company/add', async (req, res)=> {
+//     const company = new Company(req.body)
+//     try{
+//         await company.save();
+//         res.status(201).send(company);
+//     } catch (e) {
+//         res.status(400).send(e);
+//     }
+// })
 
 // router.get('/report', async (req, res)=> {
 //     try{
@@ -24,7 +35,7 @@ const router = new express.Router()
 router.get('/report/:id', async(req, res) => {
     const _id = req.params.id;
     try {
-        const report = await Reports.find({ companyTitle: _id });
+        const report = await Reports.find({ companyTitle: _id }).populate('companyTitle').populate('addedBy').exec() ;
         if (!report) {
             return res.status(404).send();
         }
@@ -33,10 +44,11 @@ router.get('/report/:id', async(req, res) => {
         res.status(500).send();
     }
 });
+
 router.get('/report/viewreport/:id', async(req, res) => {
     const _id = req.params.id;
     try {
-        const report = await Reports.find({ _id });
+        const report = await Reports.find({ _id }).populate('companyTitle').populate('addedBy').exec() ;
         if (!report) {
             return res.status(404).send();
         }

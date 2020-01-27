@@ -38,6 +38,11 @@ const userSchema = new mongoose.Schema({
                 throw new Error('CTC accepts numeric values only')
             }
         }
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Logins'
     }
 }, {
     timestamps: true

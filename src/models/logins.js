@@ -22,15 +22,26 @@ const loginSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    },
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User'
     }
 },{
     timestamps: true
 });
+
+loginSchema.virtual('fetchUserName', {
+    ref: 'Reports',
+    localField: '_id',
+    foreignField: 'addedBy'
+});
+
+loginSchema.methods.toJSON = function () {
+    const userObject = this.toObject() ;
+    delete userObject.password ;
+    delete userObject.role ;
+    delete userObject.createdAt ;
+    delete userObject.updatedAt ;
+    delete userObject.__v;
+    return userObject ;
+}
 
 const Logins = mongoose.model('Logins', loginSchema);
 

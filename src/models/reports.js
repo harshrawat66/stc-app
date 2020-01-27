@@ -58,7 +58,7 @@ const reportsSchema = new mongoose.Schema({
     addedBy: {
         type: mongoose.Schema.Types.ObjectId,
         required:true,
-        ref: 'User'
+        ref: 'Logins'
     },
     isProcessComplete: {
         type: Boolean,
@@ -67,6 +67,7 @@ const reportsSchema = new mongoose.Schema({
 }, {
     timestamps:true
 });
+
 
 const Reports = mongoose.model('Reports', reportsSchema);
 
