@@ -12,9 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "hbs": "^4.0.6",
+    "hbs": "^4.1.0",
     "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.8.6",
+    "request": "^2.88.0",
     "validator": "^12.1.0"
   },
   "devDependencies": {

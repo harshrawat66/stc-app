@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const dbPath = require('../configBreakout')
+const {dbPath} = require('../configBreakout')
 
-mongoose.connect(dbPath.dbPath, {
+mongoose.connect(dbPath, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
