@@ -26,12 +26,6 @@ const companiesSchema = new mongoose.Schema({
     timestamps: true
 });
 
-companiesSchema.virtual('fetchCompanyName', {
-    ref: 'Reports',
-    localField: '_id',
-    foreignField: 'companyTitle'
-});
-
 companiesSchema.methods.toJSON = function () {
     const userObject = this.toObject() ;
     delete userObject.createdAt ;

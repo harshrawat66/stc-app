@@ -27,12 +27,6 @@ const loginSchema = new mongoose.Schema({
     timestamps: true
 });
 
-loginSchema.virtual('fetchUserName', {
-    ref: 'Reports',
-    localField: '_id',
-    foreignField: 'addedBy'
-});
-
 loginSchema.methods.toJSON = function () {
     const userObject = this.toObject() ;
     delete userObject.password ;

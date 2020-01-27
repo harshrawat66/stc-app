@@ -1,6 +1,8 @@
 const express = require('express')
 const Reports = require('../models/reports')
 const Company = require('../models/companies')
+const Login = require('../models/logins')
+const auth = require('../auth/studentAuth')
 const router = new express.Router()
 
 // router.post('/report/add', async (req, res) => {
@@ -32,7 +34,7 @@ const router = new express.Router()
 //     }
 // });
 
-router.get('/report/:id', async(req, res) => {
+router.get('/report/:id', auth, async(req, res) => {
     const _id = req.params.id;
     try {
         const report = await Reports.find({ companyTitle: _id }).populate('companyTitle').populate('addedBy').exec() ;
@@ -41,11 +43,11 @@ router.get('/report/:id', async(req, res) => {
         }
         res.send(report);
     } catch (e) {
-        res.status(500).send();
+        res.status(500).send(e);
     }
 });
 
-router.get('/report/viewreport/:id', async(req, res) => {
+router.get('/report/viewreport/:id', auth, async(req, res) => {
     const _id = req.params.id;
     try {
         const report = await Reports.find({ _id }).populate('companyTitle').populate('addedBy').exec() ;
