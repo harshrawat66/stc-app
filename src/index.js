@@ -22,12 +22,12 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(partialsPath);
 
 app.get('', (req, res) => {
-   res.render('index', {
-       title: 'STC-APP',
-       name: 'STC-KIET'
-   })
+    res.render('index', {
+        title: 'STC-APP',
+        name: 'STC-KIET'
+    })
 });
- 
+app.use('/report', reportRouter)
 app.listen(port, () => {
-   console.log('server up on port ' + port);
+    console.log('server up on port ' + port);
 })
