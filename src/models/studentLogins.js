@@ -7,11 +7,6 @@ const studentLoginSchema = new mongoose.Schema({
         unique: true,
         trim: true
     },
-    role: {
-        type: String,
-        required: true,
-        trim: true
-    },
     token: {
         type: String,
         required: true
