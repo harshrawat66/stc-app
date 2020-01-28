@@ -8,32 +8,34 @@ const router = new express.Router();
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
-router.post('/login/add', async (req, res) => {
-    const user = new Users(req.body)
-    try{
-        await user.save();
-        res.status(201).send(user);
-    } catch (e) {
-        res.status(400).send(e);
-    }
-});
+// router.post('/login/add', async (req, res) => {
+//     const user = new Users(req.body)
+//     try{
+//         await user.save();
+//         res.status(201).send(user);
+//     } catch (e) {
+//         res.status(400).send(e);
+//     }
+// });
 
 router.post('/login/', async (req, res) => {
     const url = 'http://tech.kiet.edu/api/hrms/login/';
-    const send = req.headers.authorization
+    const send = req.headers.authorization ;
     try{
         fetch(url, {
         method: 'post',
         headers: { 'Authorization': send },
-    }).then(res => res.json()).then( async (json) => {
-        const token = jwt.sign({ _id: json.data.lib_id },jwtSigningKey);
-        const student = new studentUsers({
-            userName: json.data.lib_id,
-            token 
-        }); 
-        await student.save() ;
-        res.status(201).send(student)
-    });
+            }).then(res => res.json()).then( async (json) => {
+                const token = jwt.sign({ _id: json.data.lib_id },jwtSigningKey);
+                const student = new studentUsers({
+                    userName: json.data.lib_id,
+                    token, 
+            }); 
+                await student.save() ;
+                res.status(201).send(student)
+        }).catch((e) => {
+            res.status(400).send(e);
+        })
     } catch (e) {
         res.status(400).send(e);
     }

@@ -4,7 +4,6 @@ const studentLoginSchema = new mongoose.Schema({
     userName: {
         type: String,
         required: true,
-        unique: true,
         trim: true
     },
     token: {
@@ -14,6 +13,16 @@ const studentLoginSchema = new mongoose.Schema({
 },{
     timestamps: true
 });
+
+studentLoginSchema.methods.toJSON = function () {
+    const userObject = this.toObject() ;
+    delete userObject._id ;
+    delete userObject.role ;
+    delete userObject.createdAt ;
+    delete userObject.updatedAt ;
+    delete userObject.__v;
+    return userObject ;
+}
 
 const studentLogins = mongoose.model('studentLogins', studentLoginSchema);
 

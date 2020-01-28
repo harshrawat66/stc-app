@@ -34,6 +34,19 @@ const router = new express.Router()
 //     }
 // });
 
+router.get('/home', auth, async(req, res) => {
+    const _id = req.params.id;
+    try {
+        const report = await Reports.find({ companyTitle: _id }).populate('companyTitle').populate('addedBy').exec() ;
+        if (!report) {
+            return res.status(404).send();
+        }
+        res.send(report);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+});
+
 router.get('/report/:id', auth, async(req, res) => {
     const _id = req.params.id;
     try {

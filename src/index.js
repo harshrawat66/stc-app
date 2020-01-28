@@ -27,7 +27,7 @@ app.get('', (req, res) => {
         name: 'STC-KIET'
     })
 });
-app.use('/report', reportRouter)
+
 app.listen(port, () => {
     console.log('server up on port ' + port);
 })
