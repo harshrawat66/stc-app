@@ -18,28 +18,6 @@ const reportsSchema = new mongoose.Schema({
             }
         }
     },
-    candidatesAppeared: {
-        type: Number,
-        required:true,
-        default: null,
-        trim: true,
-        validate(value){
-            if(value < 0){
-                throw new Error('Number of candidates must be greater than zero')
-            }
-        }
-    },
-    candidatesSelected: {
-        type: Number,
-        required:true,
-        default: null,
-        required:true,
-        validate(value){
-            if(value < 0){
-                throw new Error('Number of candidates must be greater than zero')
-            }
-        }
-    },
     jobEligibility:{
         type: String,
         required: true,
