@@ -17,6 +17,7 @@
     "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.8.6",
     "node-fetch": "^2.6.0",
+    "request": "^2.88.0",
     "validator": "^12.1.0"
   },
   "devDependencies": {

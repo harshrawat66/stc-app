@@ -10,8 +10,24 @@ $(document).ready(function(){
       const user = userName.value ;
       const authString = password.value ;
       const strToEncode = user + ':' + authString + ':student' ;
-      const send = btoa(strToEncode);
+      const send = btoa(strToEncode) ;
       
+      $.ajax({url: "/login",
+      type: 'POST',
+      crossDomain: true,
+      dataType: "json",
+      headers:{
+        'Authorization': 'Basic ' + send
+      }, 
+      success: function(result){
+        console.log(result)
+        window.location = '/home'
+      },
+      error: function(result){
+        console.log(result)
+      }
+    });
+
   });
 
 });

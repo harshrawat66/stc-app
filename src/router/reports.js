@@ -34,16 +34,17 @@ const router = new express.Router()
 //     }
 // });
 
-router.get('/home', auth, async(req, res) => {
-    const _id = req.params.id;
+router.get('/home', async(req, res) => {
+    //const token = req.token;
     try {
-        const report = await Reports.find({ companyTitle: _id }).populate('companyTitle').populate('addedBy').exec() ;
+        const report = await Reports.find({ companyTitle: '5e2f2b74098c1604ae0098d2'}).populate('companyTitle').populate('addedBy').exec() ;
         if (!report) {
-            return res.status(404).send();
+            return res.status(404).send({error: 'reports'});
         }
-        res.send(report);
+        const reports = report.toString() ;
+        res.render('allreport', {reports}) ;
     } catch (e) {
-        res.status(500).send(e);
+        res.status(500).send({error: 'reports 23'});
     }
 });
 

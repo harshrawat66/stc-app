@@ -13,7 +13,7 @@ const auth = async (req, res, next) => {
         req.user = user ;
         next() ;
     }catch(e){
-        res.status(401).send({error: 'Not Authenticated'}) ;
+        res.status(401).send({error: 'Not Authenticated auth'}) ;
     }
 }
 

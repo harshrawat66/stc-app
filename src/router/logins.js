@@ -32,12 +32,13 @@ router.post('/login/', async (req, res) => {
                     token, 
             }); 
                 await student.save() ;
-                res.status(201).send(student)
+                const reqToken = 'Bearer ' + token ;
+                res.status(201).append('Authorization', reqToken).send({token}) ;
         }).catch((e) => {
-            res.status(400).send(e);
+            res.status(400).send({error: 'Not Authenticated 1'});
         })
     } catch (e) {
-        res.status(400).send(e);
+        res.status(400).send({error: 'Not Authenticated 2'});
     }
 });
 
